@@ -22,7 +22,7 @@ class Student
     sql = <<-SQL
     SELECT * FROM students WHERE grade = ?
     SQL
-   
+
     DB[:conn].execute(sql,"9").map do |row|
        new_from_db row
     end
