@@ -19,14 +19,19 @@ class Student
        end
   end
 
-  def self.find_by_name(name)
-    sql = <<-SQL
-    SELECT * FROM students WHERE grade = ?
-    SQL
+  # def self.find_by_name(name)
+  #   sql = <<-SQL
+  #   SELECT * FROM students WHERE grade = ?
+  #   SQL
+  # 
+  #   DB[:conn].execute(sql,"9").map do |row|
+  #      new_from_db row
+  #   end
 
-    DB[:conn].execute(sql,"9").map do |row|
-       new_from_db row
-    end
+
+
+
+    
   end
 
   def self.all_students_in_grade_9
@@ -80,7 +85,7 @@ class Student
     sql = <<-SQL
     SELECT * FROM students WHERE name = ?
     SQL
-  
+
     DB[:conn].execute(sql,name).map do |row|
       new_from_db(row)
     end.first
