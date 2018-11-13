@@ -45,9 +45,9 @@ class Student
       SELECT * FROM students
       WHERE grade < ?
       SQL
-      
+
       DB[:conn].execute(sql,"12").map do |row|
-        create row
+        new_from_db row
       end
     end
 
