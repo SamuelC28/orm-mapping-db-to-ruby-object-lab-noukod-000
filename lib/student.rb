@@ -56,14 +56,14 @@ class Student
     #   SELECT * FROM students WHERE grade = ?
     #   ORDER BY id LIMIT 1
     #   SQL
-    # 
+    #
     #   new_from_db DB[:conn].execute(sql,10)[0]
     # end
     def self.first_X_students_in_grade_10 x
         sql = <<-SQL
         SELECT * FROM students WHERE grade = ?
         SQL
-  
+
         DB[:conn].execute(sql,10)[0,x]
       end
 
@@ -75,6 +75,16 @@ class Student
 
     DB[:conn].execute(sql, self.name, self.grade)
   end
+
+     def self.find_by_name(name)
+       sql = <<-SQL
+       SELECT * FROM students WHERE name = ?
+       SQL
+  
+       DB[:conn].execute(sql,name).map do |row|
+         create(row)
+       end.first
+     end
 
   def self.create_table
     sql = <<-SQL
@@ -99,7 +109,7 @@ end
 #
 
 #
-#   
+#
 #
 
 #
@@ -113,15 +123,7 @@ end
 #       end
 #    end
 #    # ....................
-#    def self.find_by_name(name)
-#      sql = <<-SQL
-#      SELECT * FROM students WHERE name = ?
-#      SQL
-#
-#      DB[:conn].execute(sql,name).map do |row|
-#        create(row)
-#      end.first
-#    end
+
 #
 #    def save
 #        sql = <<-SQL
