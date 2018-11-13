@@ -92,7 +92,7 @@ class Student
       SQL
 
       DB[:conn].execute(sql,x).map do |row|
-       create row
+       new_from_db row
      end
   end
   def self.create_table
