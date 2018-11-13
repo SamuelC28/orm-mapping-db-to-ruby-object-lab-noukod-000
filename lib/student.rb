@@ -95,6 +95,7 @@ class Student
        new_from_db row
      end
   end
+  
   def self.create_table
     sql = <<-SQL
     CREATE TABLE IF NOT EXISTS students (
