@@ -34,11 +34,22 @@ class Student
         SELECT * FROM students
         WHERE grade = ?
         SQL
-  
+
         DB[:conn].execute(sql,"9").map do |row|
         new_from_db row
         end
       end
+
+  def self.students_below_12th_grade
+    sql = <<-SQL
+      SELECT * FROM students
+      WHERE grade < ?
+      SQL
+      
+      DB[:conn].execute(sql,"12").map do |row|
+        create row
+      end
+    end
 
   def save
     sql = <<-SQL
@@ -68,28 +79,9 @@ class Student
 end
 # ......
 
-#    # ..............
-#    def self.all_students_in_grade_9
-#       sql = <<-SQL
-#       SELECT * FROM students
-#       WHERE grade = ?
-#       SQL
+
 #
-#       DB[:conn].execute(sql,"9").map do |row|
-#         create row
-#       end
-#     end
-#
-#     def self.students_below_12th_grade
-#       sql = <<-SQL
-#       SELECT * FROM students
-#       WHERE grade < ?
-#       SQL
-#
-#       DB[:conn].execute(sql,"12").map do |row|
-#         create row
-#       end
-#     end
+
 #
 #     def self.first_X_students_in_grade_10 x
 #       sql = <<-SQL
